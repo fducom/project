@@ -1,0 +1,51 @@
+
+<div class="container">
+			
+
+<div class="col-xs-12 col-sm-9">	
+			<h3>Об'яви</h3>
+		
+	
+			<% if (session.authenticated && session.User.admin) { %>
+	<li><a href="/wiki/pages">Сторінки без категорії</a>(Admin only)</li>
+	<%} %>
+	<li><a href="/wiki/gdvokzal">ЖД</a></li>
+		    <li><a href="/wiki/autovokzal">Автобус</a></li>
+			  <li><a href="/wiki/citytransport">Міський транспорт</a></li>
+			    <li><a href="/wiki/taxi">Таксі</a></li>
+		<% _.each(wikis, function(wiki) { %>
+		<div class="col-xs-12 col-sm-4">
+          <div style="background-color:#ddd;padding:13px; margin-bottom:25px;">
+		<tr data-id="<%= wiki.id %>" data-model="wiki">
+			<p>
+			<h4><a href="/wiki/show/<%= wiki.id %>"><%= wiki.title %></a></h4>
+		<a href="/wiki/show/<%= wiki.id %>">
+			<img src="<%= wiki.img %>"  width="220">
+			</a>
+			<div >
+			
+			<small>Автор:<%= wiki.name %></small><br>
+			<small>Категорія:<%= wiki.category %></small>
+				</div>
+			<% if (session.authenticated && session.User.admin) { %>
+		
+			
+			<td><a href="/wiki/edit/<%= wiki.id %>" class="btn btn-sm btn-warning">Редагувати</a></td>
+	
+			<td><form action="/wiki/destroy/<%= wiki.id %>" method="POST">
+				<input type="hidden" name="_method" value="Видалити"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Видалити"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+		<%} %>
+		<td><a href="/wiki/show/<%= wiki.id %>" class="btn btn-sm btn-primary">Переглянути</a></td>
+			</p>
+		</tr> 
+	
+</div>
+
+</div>
+		<% }) %>
+	
+
+</div>

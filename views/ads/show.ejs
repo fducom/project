@@ -1,0 +1,28 @@
+
+<div class='container'>
+<div class="col-xs-12 col-md-9">
+	<div id="space"><h3>Назва:<%= ads.title %> </h3></div>
+	<section class="row">	
+	<article class="col-sm-12 col-md-12 col-lg-12">
+          <div style="background-color:#ddd;padding:15px;">
+          <h3><%= ads.title %> </h3>
+	
+		<img src="<%= ads.img %>" width="100%">
+			<hr>
+			<div>
+			<h4>Опис</h4>
+			<p><%- ads.text %></p>
+			
+			<hr>
+
+			<p><small>Дата: <%= ads.updatedAt %></small></p>
+			
+					<% if (session.authenticated && session.User.admin) { %>
+			<a class="btn btn-medium btn-primary" href="/ads/edit/<%= ads.id %>">Редагувати</a>
+			<%} %>
+			  </div>
+	
+        </div>
+</article>
+</section>
+ </div>

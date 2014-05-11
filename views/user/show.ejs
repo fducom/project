@@ -1,0 +1,63 @@
+<div class="container">
+<div class="col-xs-12 col-md-9">
+	<div id="space"><h3>Профіль 	<%= user.name %>а</h3></div>
+	<section class="row">	
+	<article class="col-sm-12 col-md-12 col-lg-12 user-details">
+            <div class="user-image">
+                <img src="http://www.gravatar.com/avatar/<%= user.email %> ?s=100&d=mm&r=g" alt="Karan Singh Sisodia" title="Karan Singh Sisodia" class="img-circle">
+            </div>
+            <div class="user-info-block">
+                <div class="user-heading">
+                    <h3><%= user.name %></h3>
+                    <span class="help-block"><% if (user.admin) { %>
+		<img src="/images/admin.png">admin
+	<% } else { %>
+			<img src="/images/pawn.png">pawn
+	<% } %>	</span>
+                </div>
+                <ul class="navigation">
+                    <li class="active">
+                        <a data-toggle="tab" href="#information">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#settings">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#email">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#events">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="user-body">
+                    <div class="tab-content">
+                        <div id="information" class="tab-pane active">
+                            <h4>Информация</h4>
+							<%= user.email %> 
+							<%- user.title %>
+                        </div>
+                        <div id="settings" class="tab-pane">
+                            <h4>Settings</h4>
+                        </div>
+                        <div id="email" class="tab-pane">
+                            <h4>Send Message</h4>
+                        </div>
+                        <div id="events" class="tab-pane">
+                            <h4>Events</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			        </article>
+        </section>
+
+       </div>
+	

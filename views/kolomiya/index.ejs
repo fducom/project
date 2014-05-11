@@ -1,0 +1,44 @@
+
+<div class="container">
+			
+
+	
+<div class="col-xs-12 col-sm-9">	
+	<h3>Довідник</h3>
+	<% _.each(kolomiyas, function(kolomiya) { %>
+		
+	
+		<div class="col-xs-12 col-sm-4">
+          <div style="background-color:#ddd;padding:13px; margin-bottom:25px;">
+		<tr data-id="<%= kolomiya.id %>" data-model="kolomiya">
+			<p>
+			<h4><a href="/kolomiya/show/<%= kolomiya.id %>"><%= kolomiya.title %></a></h4>
+		<a href="/kolomiya/show/<%= kolomiya.id %>">
+			<img src="<%= kolomiya.img %>"  width="220">
+			</a>
+			<div >
+			
+			<small>Автор:<%= kolomiya.name %></small>
+				</div>
+			<% if (session.authenticated && session.User.admin) { %>
+		
+			
+			<td><a href="/kolomiya/edit/<%= kolomiya.id %>" class="btn btn-sm btn-warning">Редагувати</a></td>
+
+			<td><form action="/kolomiya/destroy/<%= kolomiya.id %>" method="POST">
+				<input type="hidden" name="_method" value="Видалити"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Видалити"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+		<%} %>
+		<td><a href="/kolomiya/show/<%= kolomiya.id %>" class="btn btn-sm btn-primary">Переглянути</a></td>
+			</p>
+		</tr> 
+	
+</div>
+
+</div>
+		<% }) %>
+	
+
+</div>

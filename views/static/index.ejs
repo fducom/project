@@ -1,0 +1,479 @@
+ <title>Головна - City Guide Info</title>
+
+<div class="container">
+<div class="col-xs-12 col-md-9">
+ <hr>
+
+	<div id="space" style="margin:10px;"></div>
+<% if (session.authenticated) { %>
+	<section class="row">
+		<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="profile">
+	
+				<img src="http://cs606018.vk.me/v606018181/2939/mCdJF7WRuOQ.jpg"  width="150" height="150" alt="..." class="img-circle">
+				<p><%= session.User.name %></p>
+				<p><%= session.User.email %></p>
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item active">Онлайн</li>
+				<a href="user/edit/<%= session.User.id %>"><li class="list-group-item">Редагувати профіль</li></a>
+				<li class="list-group-item">Налаштування</li>
+			<a href="user/show/<%= session.User.id %>">	<li class="list-group-item">Статистика</li></a>
+			<a ><li class="list-group-item" id="a-popover" >Повідомлення</li></a>
+				
+			</ul>
+				
+			 <!-- Div oculta que será exibida dentro do popover. -->
+        <div id="div-popover" class="hide">
+		  <div style="width:200px;">
+            <img src="http://cs606018.vk.me/v606018181/2939/mCdJF7WRuOQ.jpg" align="right" width="50" height="50" alt="..." class="img-circle">
+				<p align="right"><%= session.User.name %>: привет</p>
+	  </div>​		
+<div style="width:200px;">	  
+				   <img src="http://cs606018.vk.me/v606018181/2939/mCdJF7WRuOQ.jpg" align="left"  width="50" height="50" alt="..." class="img-circle">
+				<p  align="left">Dima: привет</p>
+		  </div>​
+		  <br /><br />
+		  <input type="text" class="form-control" placeholder="Сообщение" name="title">
+            <br />
+            <!-- Botão dentro do popover responsável por abrir o modal. -->
+         
+            <!-- Botão dentro do popover responsável por fechar o popover. -->
+            <button id="btn-fechar" class="btn btn-danger" data-dismiss="clickover">Заховати</button>
+        </div>​
+     
+				 <!-- Div oculta que será exibida dentro do popover. -->
+		</article>
+		
+		<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+								 <span class="offer-type">	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p><div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="data:image/jpeg;base64,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" alt="">
+								<div class="panel-body">
+								нцидент із затриманням викладача медколеджу прокоментували у міліції. Зокрема, виконувач обов'язки начальника Коломийського міськвідділу Остап Білейчук
+								</div>
+								<div class="panel-footer">
+								<center><small>like:323 || comment 12</small></center>
+								</div>
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+		<div class="panel panel-default pan-property">
+								 <span class="offer-type">	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p><div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6ZHOUQw51EWKmu2WqKLjhHm82eXkuXlVXM79QzdF6kxjkK2j-" alt="">
+								<div class="panel-body">
+								нцидент із затриманням викладача медколеджу прокоментували у міліції. Зокрема, виконувач обов'язки начальника Коломийського міськвідділу Остап Білейчук 
+								</div>
+								<div class="panel-footer">
+								<center><small>like:323 || comment 12</small></center>
+								</div>
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+								 <span class="offer-type">	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p><div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="http://wallpaperstock.net/galaxy-note-with-ice-cream-sandwich_wallpapers_33820_1280x720.jpg"alt="">
+					
+								
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+		<div class="panel panel-default pan-property">
+							 <span class="offer-type">	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p><div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="http://futureflamme.f.u.pic.centerblog.net/o/3d78cfde.jpg" alt="">
+						
+								
+							</div>
+	</article>
+	</section>
+	
+
+
+
+ 	<div id="space"><h3>Фотосети</h3></div>	 <hr>
+	<section class="row">
+
+  
+    <div class='col-md-12'>
+      <div class="carousel slide media-carousel" id="media">
+        <div class="carousel-inner">
+          <div class="item  active">
+            <div class="row">
+           
+<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+							 <span class="offer-type">	<div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="http://topdj.ua/upload0/photo-popular/00/06/36/0063623.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small><p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+								 <span class="offer-type">	<div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="http://topdj.ua/upload0/photo-popular/00/06/36/0063626.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small><p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>	
+	<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+							 <span class="offer-type">	<div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="http://www.mrwallpaper.com/wallpapers/Big-Cruise-Ship-1280x720.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small><p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+            </div>
+          </div>
+          <div class="item">
+            <div class="row">
+             <article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+							 <span class="offer-type">	<div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="http://topdj.ua/upload0/photo-popular/00/06/35/0063596.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small><p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+							 <span class="offer-type">	<div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="http://topdj.ua/upload0/photo-popular/00/06/36/0063626.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small><p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+								 <span class="offer-type">	<div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span>><img class="img-responsive" src="http://www.mrwallpaper.com/wallpapers/Big-Cruise-Ship-1280x720.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small><p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+            </div>
+          </div>
+          <div class="item">
+            <div class="row">
+              <article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+						 <span class="offer-type">	<div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="http://www.mrwallpaper.com/wallpapers/Big-Cruise-Ship-1280x720.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+							 <span class="offer-type">	<div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="http://www.mrwallpaper.com/wallpapers/Big-Cruise-Ship-1280x720.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+								 <span class="offer-type">	<div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span><img class="img-responsive" src="http://www.mrwallpaper.com/wallpapers/Big-Cruise-Ship-1280x720.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+            </div>
+          </div>
+        </div>
+        <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+        <a data-slide="next" href="#media" class="right carousel-control">›</a>
+      </div>                          
+    </div>
+
+</section>
+	      <% } %>
+		       <% if (!session.authenticated) { %>
+			         	   <section class="row">
+	<article class="col-sm-4 col-md-4 col-lg-4">
+		<div class="panel panel-default pan-property">
+								 <img class="img-responsive" src="http://topdj.ua/upload0/events/00/16/47/164709o.jpg" width="350" alt="">
+							
+								<span class="offer-type">Інцидент із затриманням викладача					
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								 </span>
+							</div>
+			
+	</article>
+		
+	<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+								 <img class="img-responsive" src="http://cs412717.vk.me/v412717599/68b1/JFowHmQf0hA.jpg"  width="118" alt="">
+							
+								<span class="offer-type">Інцидент із затриманням викладача					
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								 </span>
+							</div>
+
+		<div class="panel panel-default pan-property">
+								 				 <img class="img-responsive" src="http://cs412717.vk.me/v412717599/68b1/JFowHmQf0hA.jpg"  width="118" alt="">
+								<span class="offer-type">Інцидент із затриманням викладача					
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								 </span>
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+						<div class="panel panel-default pan-property">
+								 <img class="img-responsive" src="http://cs412717.vk.me/v412717599/68b1/JFowHmQf0hA.jpg"  width="350" alt="">
+							
+								<span class="offer-type">Інцидент із затриманням викладача					
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								 </span>
+							</div>
+	</article>
+	</section>
+		  <% } %>
+	<div id="space"><h3>Події</h3></div> <hr>
+	<section class="row">
+	
+		<article class="col-sm-4 col-md-4 col-lg-4">
+		<div class="panel panel-default pan-property">
+								 <span class="offer-type">Інцидент із затриманням викладача</span><img class="img-responsive" src="http://www.mrwallpaper.com/wallpapers/Beach-Cocktail-1280x720.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+								 <span class="offer-type">Інцидент із затриманням викладача</span><img class="img-responsive" src="http://imgs.mi9.com/uploads/fine-art/4386/red-sea-fishes_1280x720_77340.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+								 <span class="offer-type">Інцидент із затриманням викладача</span><img class="img-responsive" src="http://www.mrwallpaper.com/wallpapers/Big-Cruise-Ship-1280x720.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+	
+	</section>
+		<div id="space"><h3>Новини</h3></div><hr>
+	<section class="row">
+
+		<article class="col-sm-4 col-md-4 col-lg-4">	 
+		<div class="panel panel-default pan-property">
+								 <span class="offer-type">Інцидент із затриманням викладача</span><img class="img-responsive" src="http://www.mrwallpaper.com/wallpapers/lake-alberta-canada-1280x720.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+								 <span class="offer-type">Інцидент із затриманням викладача</span><img class="img-responsive" src="http://cs606018.vk.me/v606018181/2939/mCdJF7WRuOQ.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+		<div class="panel panel-default pan-property">
+								 <span class="offer-type">Інцидент із затриманням викладача</span><img class="img-responsive" src="http://t.wallpaperweb.org/wallpaper/buildings/1280x720/01551_nycskyline_1280x720.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+	
+	</section>
+		<div id="space"><h3>Довідник</h3></div>
+	<section class="row">
+	
+		<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+								 <span class="offer-type">Інцидент із затриманням викладача</span><img class="img-responsive" src="http://wallpaperstock.net/miniature-new-york-city_wallpapers_25829_1280x720.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+		<div class="panel panel-default pan-property">
+								 <span class="offer-type">Інцидент із затриманням викладача</span><img class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5WQHaymPC0LN62jliI6Y-b87-hHsACwy9KDe-T0ExBiAB7nQ7" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+	
+							<div class="panel panel-default pan-property">
+								 <span class="offer-type">Інцидент із затриманням викладача</span><img class="img-responsive" src="http://wpapers.ru/wallpapers/3d/Abstractions/8451/1280x720_%D1%86%D0%B2%D0%B5%D1%82%D0%BD%D0%BE%D0%B9-%D0%B4%D1%8B%D0%BC.jpg" alt="">
+								
+								<div class="panel-footer">
+								<center><small>	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p></small></center>
+								</div>
+							</div>
+					
+	</article>
+	
+	</section>
+
+
+	</div>
+		
+		<!-- 			<div class="panel panel-default pan-property">
+								 <span class="offer-type">Інцидент із затриманням викладача</span><img class="img-responsive" src="http://cs606018.vk.me/v606018181/2939/mCdJF7WRuOQ.jpg" alt="">
+								<div class="panel-body">
+								</div>
+								<div class="panel-footer">
+								<center><small>like:323 || comment 12</small></center>
+								</div>
+							</div> -->
+
+

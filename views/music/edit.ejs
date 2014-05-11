@@ -1,0 +1,19 @@
+	
+<% if (session.authenticated && session.User.admin) { %>	
+	<form action="/music/update/<%= music.id %>" method="POST" class="form-edit">
+		<h2> Редагувати music </h2>
+
+		<input type="hidden" value="<%= session.User.id %>" name="name" type="text" class="form-control"/>
+		<input value="<%= music.title %>" name="title" type="text" class="form-control"/>
+		
+		<textarea name="text" id="redactor"/><%= music.text %></textarea>
+		<input value="<%= music.img %>" name="img" type="text" class="form-control"/>
+				
+		
+	</div>
+		<br>
+		<input type="submit" value="Зберегти" class="btn btn-lg btn-primary btn-block"/>
+		<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+	</form>
+
+ <%} else { res.redirect('/session/new'); } %>

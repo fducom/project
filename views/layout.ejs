@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+       
+<base href="http://cityg.info">
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="imagesu/Zb8AyjH3R/Zb8AyjH3R.png" rel="shortcut icon" type="image/x-icon" />
+  <meta name="google-site-verification" content="IoQuKwsV_P11ikxRkH6Ke-uMAKWF908ybTrjXwXrwPU" />
+  <meta name="wot-verification" content="aa0dbf228e69c72a9842"/>
+  <meta name="keywords" content="keyword, keyword, aa0dbf228e69c72a9842"/>
+    <!--  
+        Stylesheets and Preprocessors
+        ============================== 
+	
+        You can always bring in CSS files manually with `link` tags, or asynchronously
+        on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+        take advantage of Sails' boilerplate asset management.
+
+        By default, tylesheets from your `assets/linker/styles` folder are included
+        here automatically.  Both CSS (.css) and LESS (.less) are supported.
+        In production, your styles will be minified and concatenated into a single file.
+        
+        To customize any part of the built-in behavior, just edit your Gruntfile.
+        For example, here are a few things you could do:
+            
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+	<style>
+.form-search {
+  display: inline-block;
+  /* background: -moz-linear-gradient(#D3D3D3, #CACACA 50%, #A9A9A9 50%, #9B9B9B);
+  background: -ms-linear-gradient(#D3D3D3, #CACACA 50%, #A9A9A9 50%, #9B9B9B);
+  background: -o-linear-gradient(#D3D3D3, #CACACA 50%, #A9A9A9 50%, #9B9B9B);
+  background: -webkit-linear-gradient(#D3D3D3, #CACACA 50%, #A9A9A9 50%, #9B9B9B); */
+  border-radius: 5px;
+  padding: 4px;
+  margin-top:5px;
+    margin-right:10px;
+}
+
+.form-search input {
+  width: 60px;
+  height: 32px;
+  line-height: 32px;
+  font: 13px Helvetica, Arial, sans-serif; 
+  color:#6E7074;
+  text-shadow: 0 1px 0 #FFF;
+  -moz-transition: all .2s ease-out;
+  -webkit-transition: all .2s ease-out;
+  -o-transition: all .2s ease-out;
+  transition: all .2s ease-out;  
+  padding: 0 30px 0 6px; 
+  background-image: url("http://3.bp.blogspot.com/-4w14hQHr5yQ/Tgm6u7KwUkI/AAAAAAAACAI/Hu2poBOPx3g/s1600/search.png"), -moz-linear-gradient(#BCBCBC, #EBEBEB);
+  background-image: url("http://3.bp.blogspot.com/-4w14hQHr5yQ/Tgm6u7KwUkI/AAAAAAAACAI/Hu2poBOPx3g/s1600/search.png"), -ms-linear-gradient(#BCBCBC, #EBEBEB);
+  background-image: url("http://3.bp.blogspot.com/-4w14hQHr5yQ/Tgm6u7KwUkI/AAAAAAAACAI/Hu2poBOPx3g/s1600/search.png"), -o-linear-gradient(#BCBCBC, #EBEBEB);
+  background-image: url("http://3.bp.blogspot.com/-4w14hQHr5yQ/Tgm6u7KwUkI/AAAAAAAACAI/Hu2poBOPx3g/s1600/search.png"), -webkit-linear-gradient(#BCBCBC, #EBEBEB); 
+  background-repeat: no-repeat; 
+  background-position: 100% 50%, 100% 100%;
+  border: 1px solid #747474;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 1px #575555, 0 1px 0 #FFF; 
+}
+
+.form-search input:focus {
+  width: 254px;
+  box-shadow: inset 0 1px 1px #46575b, 0 1px 0 #FFF;
+  color: #25464D;
+  background-image: url("http://3.bp.blogspot.com/-4w14hQHr5yQ/Tgm6u7KwUkI/AAAAAAAACAI/Hu2poBOPx3g/s1600/search.png"), -moz-linear-gradient(#9CC2CA, #DFECEF);
+  background-image: url("http://3.bp.blogspot.com/-4w14hQHr5yQ/Tgm6u7KwUkI/AAAAAAAACAI/Hu2poBOPx3g/s1600/search.png"), -ms-linear-gradient(#9CC2CA, #DFECEF);
+  background-image: url("http://3.bp.blogspot.com/-4w14hQHr5yQ/Tgm6u7KwUkI/AAAAAAAACAI/Hu2poBOPx3g/s1600/search.png"), -o-linear-gradient(#9CC2CA, #DFECEF);
+  background-image: url("http://3.bp.blogspot.com/-4w14hQHr5yQ/Tgm6u7KwUkI/AAAAAAAACAI/Hu2poBOPx3g/s1600/search.png"), -webkit-linear-gradient(#9CC2CA, #DFECEF);
+}
+</style>
+<style>
+
+a.st-user{background-image:url('http://topdj.com/images/icons/man.png');background-repeat: no-repeat ;padding:2px 4px 2px 24px;background-position:8px 4px;width:18px}
+a.st-user:hover{background-position:8px -16px;background-repeat: no-repeat ;}
+
+a.st-like{background-image:url('http://topdj.com/images/icons/like.png');background-repeat: no-repeat ;padding:2px 4px 2px 24px;background-position:8px 4px;width:18px}
+a.st-like:hover{background-position:8px -16px;background-repeat: no-repeat ;}
+
+a.st-comment{background-image:url('http://topdj.com/images/icons/comment.png');background-repeat: no-repeat ;padding:2px 4px 2px 24px;background-position:8px 4px;width:18px}
+a.st-comment:hover{background-position:8px -16px;background-repeat: no-repeat ;}
+
+a.st-time{background-image:url('http://topdj.com/images/icons/time.png');background-repeat: no-repeat ;padding:2px 2px 2px 24px;background-position:8px 3px;width:18px}
+
+.profile {
+background-color: #FF766C;
+border: 1px solid #ff766c;
+}
+
+.profile img {
+display: block;
+border: 10px solid rgba(255, 255, 255, 0.3);
+margin: 0 auto;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+.profile p {
+text-align: center;
+color: #fff;
+}
+
+.list-group-item {
+background-color: #fff;
+border-radius: 0px !important;
+border: 1px solid #DDD;
+}
+
+.list-group-item.active, .list-group-item:hover {
+border-left: 3px solid #FF766C;
+background-color: #F8F7F5;
+}
+
+.tooltip{
+
+position:absolute;
+z-index:1020;
+display:block;
+visibility:visible;
+padding:5px;
+font-size:11px;
+opacity:0;
+filter:alpha(opacity=0);
+
+}
+.tooltip.in{
+/*opacity:0;
+filter:alpha(opacity=80);*/
+
+}
+.tooltip.top{
+margin-top:-2px;
+}
+.tooltip.right{
+margin-left:2px;
+}
+.tooltip.bottom{
+margin-top:2px;
+}
+.tooltip.left{
+margin-left:-2px;
+}
+.tooltip.top .tooltip-arrow{
+bottom:0;
+left:0;
+margin-left:0;
+border-left:0 solid transparent;
+border-right:5px solid transparent;
+border-top:0 solid #000;
+}
+.tooltip.left .tooltip-arrow{
+bottom:0;
+left:0;
+margin-left:0;
+border-left:0 solid transparent;
+border-right:5px solid transparent;
+border-top:0 solid #000;
+}
+.tooltip.bottom .tooltip-arrow{
+bottom:0;
+left:0;
+margin-left:0;
+border-left:0 solid transparent;
+border-right:5px solid transparent;
+border-top:0 solid #000;
+}
+.tooltip.right .tooltip-arrow{
+bottom:0;
+left:0;
+margin-left:0;
+border-left:0 solid transparent;
+border-right:5px solid transparent;
+border-top:0 solid #000;
+}
+.tooltip-inner{
+width:200px;
+padding:3px 8px;
+color:#fff;
+text-align:center;
+text-decoration:none;
+background-color:#313131;
+-webkit-border-radius:0px;
+-moz-border-radius:0px;
+border-radius:0px;
+}
+.tooltip-arrow{
+position:absolute;
+width:0;
+height:0;
+}
+
+.pan-property { 
+position: relative;
+}
+
+.img-responsive {
+display: block;
+max-width: 100%;
+height: auto;
+
+}
+.pan-property:hover .offer-type {
+background: #666;
+display: inline-block;
+z-index:auto;
+
+}
+.offer-type {
+position: absolute;
+top: 0px;
+left: 0px;
+padding: 10px 9px;
+color: #fff;
+z-index:-100;
+width:100%;
+}
+
+.user-details {position: relative; padding: 0;}
+.user-details .user-image {position: relative; z-index: 1; width: 100%; text-align: center;}
+.user-image img { clear: both; margin: auto; position: relative;}
+
+.user-details .user-info-block {width: 100%; position: absolute; top: 55px; background: rgb(255, 255, 255); z-index: 0; padding-top: 35px;}
+.user-info-block .user-heading {width: 100%; text-align: center; margin: 10px 0 0;}
+.user-info-block .navigation {float: left; width: 100%; margin: 0; padding: 0; list-style: none; border-bottom: 1px
+18:39:24	
+solid #428BCA; border-top: 1px solid #428BCA;}
+.navigation li {float: left; margin: 0; padding: 0;}
+.navigation li a {padding: 20px 30px; float: left;}
+.navigation li.active a {background: #428BCA; color: #fff;}
+.user-info-block .user-body {float: left; padding: 5%; width: 90%;}
+.user-body .tab-content > div {float: left; width: 100%;}
+.user-body .tab-content h4 {width: 100%; margin: 10px 0; color: #333;}
+
+
+.glyphicon { margin-right:5px; }
+.thumbnail
+{
+margin-bottom: 20px;
+padding: 0px;
+-webkit-border-radius: 0px;
+-moz-border-radius: 0px;
+border-radius: 0px;
+	overflow: hidden;
+  
+}
+
+.item.list-group-item
+{
+float: none;
+width: 100%;
+background-color: #fff;
+margin-bottom: 10px;
+}
+.item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
+{
+background: #428bca;
+}
+
+.item.list-group-item .list-group-image
+{
+margin-right: 10px;
+}
+.item.list-group-item .thumbnail
+{
+margin-bottom: 0px;
+}
+.item.list-group-item .caption
+{
+padding: 9px 9px 0px 9px;
+}
+.item.list-group-item:nth-of-type(odd)
+{
+background: #eeeeee;
+} 
+
+.item.list-group-item:before, .item.list-group-item:after
+{
+display: table;
+content: " ";
+}
+
+.item.list-group-item img
+{ 
+float: left;
+}
+.item.list-group-item:after
+{
+clear: both;
+}
+.list-group-item-text
+{
+margin: 0 0 11px;
+}
+
+   .media
+    {
+        /*box-shadow:0px 0px 4px -2px #000;*/
+        margin: 20px 0;
+        padding:30px;
+    }
+    .dp
+    {
+        border:10px solid #eee;
+        transition: all 0.2s ease-in-out;
+    }
+    .dp:hover
+    {
+        border:2px solid #eee;
+        transform:rotate(360deg);
+        -ms-transform:rotate(360deg);  
+        -webkit-transform:rotate(360deg);  
+        /*-webkit-font-smoothing:antialiased;*/
+    }
+	
+
+
+
+</style>
+ 
+    <!--STYLES-->
+    <link rel="stylesheet" href="/linker/styles/bootstrap.css">
+    <link rel="stylesheet" href="/linker/styles/css/demo.css">
+    <link rel="stylesheet" href="/linker/styles/css/fallback.css">
+    <link rel="stylesheet" href="/linker/styles/css/normalize.css">
+    <link rel="stylesheet" href="/linker/styles/css/style1.css">
+    <link rel="stylesheet" href="/linker/styles/css/style2.css">
+    <link rel="stylesheet" href="/linker/styles/css/style3.css">
+    <link rel="stylesheet" href="/linker/styles/css/style4.css">
+    <link rel="stylesheet" href="/linker/styles/css/style5.css">
+    <link rel="stylesheet" href="/linker/styles/css/style_common.css">
+    <link rel="stylesheet" href="/linker/styles/custom.css">
+    <!--STYLES END-->
+ 
+    <!--Added this so the client has access to the csrf tag and it's grabbed first service side on every page -->
+    <script type="text/javascript">
+      window.overlord = { csrf: "<%= _csrf %>" };
+    </script>
+
+    <!-- The sound file tht will play on activity events -->
+    <audio id="chatAudio">
+      <source src="/sounds/notify.ogg" type="audio/ogg">
+      <source src="/sounds/notify.mp3" type="audio/mpeg">
+      <source src="/sounds/notify.wav" type="audio/wav">
+    </audio>
+
+  </head>
+
+  <body>
+ 
+    <div class=" navbar-inverse navbar-top" style="margin-top:-59px;background-color:#333333;">
+      <div class="container" > 
+	  
+        <div class="navbar-header" style="height:50px;">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+		  <div style="margin-top:-12px">
+		  <a class="navbar-brand" href="/" ><img src="/images/logo.png" width="60">
+           </a>
+		   </div>
+        </div> 
+        <div class="navbar-collapse collapse" > 
+          <ul class="nav navbar-nav"style="margin-top:0px;font-size:16px;margin-left:20%;">
+		  <li><a href="/shows">Афіша</a></li>
+		    <li><a href="/news">Новини</a></li>
+			  <li><a href="/photos">Фото</a></li>
+			    <li><a href="/music">Медіа</a></li>
+				<li class="dropdown"><a href="/wiki" class="dropdown-toggle" data-toggle="dropdown">Довідник
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="/wiki/gdvokzal">ЖД</a></li>
+		    <li><a href="/wiki/autovokzal">Автобус</a></li>
+			  <li><a href="/wiki/citytransport">Міський транспорт</a></li>
+			    <li><a href="/wiki/taxi">Таксі</a></li>
+    </ul>
+  </li>
+				<li><a href="/ads">Об'яви</a></li>
+				</ul>
+					 <ul class="nav navbar-nav navbar-right">
+					<li ><form class="form-search" method="get" action="/search" target="_blank">
+<input type="text" name="q" placeholder="пошук" value=""/></form></li>
+					 	</ul>
+        </div>
+      </div>
+    </div>
+	<div class="container">
+<div>
+<div class=" navbar-collapse collapse"style="background-color: rgba(255, 255, 255, 0.3);">
+        <ul class="nav navbar-nav">
+		
+		   <ol class="breadcrumb">
+            <li><a href="#" class="">Коломия</a>
+            </li>
+            <li class="active">Головна</li>
+        </ol>
+        </ul>
+		 <ul class="nav navbar-nav navbar-right">
+            
+            <% if (session.authenticated) { %>
+              <li class="active"><a href="/user/show/<%= session.User.id %>"><%= session.User.name %> </a> </li>
+            <% } %>
+            <% if (session.authenticated && session.User.admin) { %>
+            
+			<li><a href="/user">Контроль</a></li>
+			
+            <% } %>
+			
+
+     
+         
+            <% if (session.authenticated) { %>
+              <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy">Вийти</a>
+    
+            <% } %>
+          
+          <% if (!session.authenticated) { %>
+            
+         <li>   <a href="#" data-toggle="modal" data-target="#myModallogin" >Вхід</a></li>
+			
+		<li>	<a href="#" data-toggle="modal" data-target="#myModalsign" >Реєстрація</a></li>
+          	   
+		  <% } %>
+        </ul>
+		 <div class="navbar-right">
+		<ul class="nav navbar-nav" style="font-size:14px;">		
+         </ul>
+	   </div>
+</div>
+	<!-- Modal LOGIN -->
+<div class="modal fade" id="myModallogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Вхід</h4>
+      </div>
+      <div class="modal-body">
+	 <form action="/session/create" method="POST">
+	<h2 class="form-signin-heading">Будьласка увійдіть...</h2>
+
+	<p><input type="text" class="form-control" placeholder="Email" name="email"></p>
+	<p><input type="password" class="form-control" placeholder="Пароль" name="password"></p>
+	<p><input type="submit" class="btn btn-lg btn-primary btn-block" value="Вхід"/></p>
+	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+	
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<a href="/session/new" class="btn btn-primary" >Вілкрити в звичайному вікні</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+          	<!-- Modal SIGN -->
+<div class="modal fade" id="myModalsign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Регаємся</h4>
+      </div>
+      <div class="modal-body">
+	
+<form action="/user/create" method="POST" id="sign-up-form">
+
+	<h2 class="form-signin-heading">Створити ак.</h2>
+
+	
+	<div class="control-group">
+	<p><input type="text" class="form-control" placeholder="Ім'я" name="name">
+	</div>
+
+	<!-- <div class="control-group">
+	<p><textarea name="title"  id="redactor"/></textarea>	 
+		
+	</div> -->
+	<div class="control-group">
+	<p><input type="text" class="form-control" placeholder="email адреса" name="email">
+	</div>
+
+	<div class="control-group">
+	<p><input type="password" class="form-control" placeholder="password" name="password" id="password">
+	</div>
+
+	<div class="control-group">
+	<p><input type="password" class="form-control" placeholder="password повторно" name="confirmation">
+	<br />
+	</div>
+
+	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Створити ак"/>
+	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<a href="/user/new" class="btn btn-primary" >Вілкрити в звичайному вікні</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+
+	 <div  class="col-xs-1 col-sm-1 col-md-1" style="margin-top:150px;margin-left:-20px;position:fixed; ">
+      <a class="btn" href="/photos"><i class="icon-align"> <img src="/images/photo.png" width="100%"></i></a>
+		 <a class="btn" href="/music"><i class="icon-align"><img src="/images/music.png"width="100%" ></i></a>
+		  <a class="btn" href="/wiki"><i class="icon-align"> <img src="/images/shopping.png"width="100%"></i></a>
+		    <a class="btn" href="/ads"><i class="icon-align"><img src="/images/calendar.png"width="100%"></i></a>
+		   </div>
+   
+    
+    <%- body %>  
+
+								
+			
+	    <div class="col-xs-12 col-md-3">
+		
+			<div class="view">
+			
+					<div class="view-back">
+						<span data-icon="A">987</span>
+						<span data-icon="B">130</span>
+						<a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
+					</div>
+					<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTtDM-iAtbhvhrc0nQICkdSxaorFy_Fs9x_wJvIYGWB0FmlyZS93w"height="100%" width="100%" />
+				</div>
+					<div class="viewr">
+					<div class="view-back">
+						<span data-icon="A">987</span>
+						<span data-icon="B">130</span>
+						<a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
+					</div>
+					<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRsg_VnIYWdnHpzBorZFxpswrX2PDpJeeKgQmEh3JlDG16eVmBaJQ"height="100%" width="100%" />
+				</div>
+					<div class="view">
+					<div class="view-back">
+						<span data-icon="A">987</span>
+						<span data-icon="B">130</span>
+						<a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
+					</div>
+					<img src="http://www.asavie.com/wp-content/uploads/2014/01/newwebsite.jpg"height="100%" width="100%" />
+				</div>
+					<div class="viewr">
+					<div class="view-back">
+						<span data-icon="A">987</span>
+						<span data-icon="B">130</span>
+						<a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
+					</div>
+					<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR89Pp9joUQ6c_0P8iL-OtcwVvDOmBqTr-yK4ISRE29ODdMn-6BrQ"height="100%" width="100%" />
+				</div>
+					<div class="view">
+					<div class="view-back">
+						<span data-icon="A">987</span>
+						<span data-icon="B">130</span>
+						<a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
+					</div>
+					<img src="https://site.aace.org/conf/cities/jacksonville/images/skyline.jpg"height="100%" width="100%" />
+				</div>
+					<div class="viewr">
+					<div class="view-back">
+						<span data-icon="A">987</span>
+						<span data-icon="B">130</span>
+						<a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
+					</div>
+					<img src="http://imgs.mi9.com/uploads/fine-art/4386/red-sea-fishes_1280x720_77340.jpg"height="100%" width="100%" />
+				</div>
+		
+		</div>
+	
+				</div>
+    <div class="container">
+      <hr>
+      <footer class="footer">
+        <div>
+          <a href="http://cityg.info/">cityg.info</a> 
+          <div>City guide &copy; all right reserve</div>
+        </div> 
+      </footer>
+    </div>
+
+    <!--
+        Client-side Templates
+        ========================
+
+    		HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+        that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `assets/linker/templates` folder, then
+        include them here automatically.
+        
+        To customize this behavior to fit your needs, just edit your Gruntfile.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different template engine (handlebars, jade, dust, etc.)
+            + Internationalize your templates using a server-side stringfile
+              before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    <script type="text/javascript" src="/jst.js"></script>
+    <!--TEMPLATES END-->
+
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can 
+      take advantage of Sails' boilerplate asset management.
+
+      By default, filesin your `assets/linker/js` folder are included here
+      automatically.  Both JavaScript (.js) and CoffeeScript (.coffee) are supported.
+      In production, your scripts will be minified and concatenated into a single file. 
+      
+      To customize any part of the built-in behavior, just edit your Gruntfile.
+      For example, here are a few things you could do:
+          
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script><script type="text/javascript">google.load("jquery", "1.7");</script>
+<!--SCRIPTS-->
+<script src="/linker/js/socket.io.js"></script>
+<script src="/linker/js/sails.io.js"></script>
+<script src="/linker/js/jquery.validate.min.js"></script>
+<script src="/linker/js/app.js"></script>
+<script src="/linker/js/bootstrap.js"></script>
+<script src="/linker/js/customValidate.js"></script>
+<script src="/linker/js/jquery.js"></script>
+<script src="/linker/js/js/jquery.hoverfold.js"></script>
+<script src="/linker/js/js/modernizr.custom.69142.js"></script>
+<script src="/linker/js/underscore.js"></script>
+<!--SCRIPTS END-->
+
+<script src="/redactor/redactor/redactor.js"></script> 
+<script>
+
+$(function()
+{
+$('#redactor').redactor({
+imageGetJson: 'images/images.json',
+imageUpload: 'images/upload/upload.php',
+fileUpload: '/upload/upload_file.php'
+});
+});
+
+
+$(function () {
+    $( '#table' ).searchable({
+        striped: true,
+        oddRow: { 'background-color': '#f5f5f5' },
+        evenRow: { 'background-color': '#fff' },
+        searchType: 'fuzzy'
+    });
+    
+    $( '#searchable-container' ).searchable({
+        searchField: '#container-search',
+        selector: '.row',
+        childSelector: '.col-xs-4',
+        show: function( elem ) {
+            elem.slideDown(100);
+        },
+        hide: function( elem ) {
+            elem.slideUp( 100 );
+        }
+    })
+});
+
+
+</script>
+<script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+
+// Associa o evento do popover ao clicar no link.
+$('#a-popover').popover({
+trigger: 'manual',
+html: true,
+title: 'Повідомлення',
+content: $('#div-popover').html() // Adiciona o conteúdo da div oculta para dentro do popover.
+}).click(function (e) {
+e.preventDefault();
+// Exibe o popover.
+$(this).popover('show');
+});
+
+$('#btn-fechar').live('click', function (e) {
+// Oculta o popover ao clicar no botão fechar. 
+$('#a-popover').popover('hide');
+});
+
+$('#btn-modal').live('click', function (e) {
+// Oculta o popover ao clicar no botão abrir modal.
+$('#a-popover').popover('hide');
+// Abre o modal.
+$('#div-modal').modal();
+});
+});
+
+$(document).ready(function() {
+$('#list').click(function(event){event.preventDefault();$('#products .item').addClass('list-group-item');});
+$('#grid').click(function(event){event.preventDefault();$('#products .item').removeClass('list-group-item');$('#products .item').addClass('grid-group-item');});
+});
+</script>
+
+</div>
+</body>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38091667-3', 'cityg.info');
+ga('send', 'pageview');
+
+</script>
+</html>

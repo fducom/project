@@ -1,0 +1,51 @@
+ <title>Медіа - City Guide Info</title>
+<style>
+.sound-production-css iframe {
+width: 140px;
+}
+.media-soundcloud-preview-wrapper, iframe {
+height: 140px;
+}
+</style>
+
+<div class="container">
+		
+<div class="col-xs-12 col-md-9">
+	<div id="space"><h3>Медіа</h3></div>
+	<section class="row">
+		
+		<% _.each(musics, function(music) { %>
+		
+		<article class="col-sm-6 col-md-6 col-lg-6">
+          <div style="background-color:#ddd;padding:13px; margin-bottom:25px;">
+		<tr data-id="<%= music.id %>" data-model="music" >
+			<p>
+			
+
+			<h4><a href="/music/show/<%= music.id %>"><%= music.title %></a></h4>
+		
+			<p><%- music.text %></p>
+		
+	
+	
+			<% if (session.authenticated && session.User.admin) { %>
+			
+			
+			<td><a href="/music/edit/<%= music.id %>" class="btn btn-sm btn-warning">Редагувати</a></td>
+
+			<td><form action="/music/destroy/<%= music.id %>" method="POST">
+				<input type="hidden" name="_method" value="Видалити"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Видалити"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+		<%} %>
+		<td><a href="/music/show/<%= music.id %>" class="btn btn-sm btn-primary">Переглянути</a></td>
+			</p>
+		</tr> 
+	
+</div>
+</article>
+
+		<% }) %>
+</section>
+</div>

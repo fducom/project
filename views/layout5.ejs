@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>City Guide Info</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="imagesu/Zb8AyjH3R/Zb8AyjH3R.png" rel="shortcut icon" type="image/x-icon" />
+  <meta name="google-site-verification" content="IoQuKwsV_P11ikxRkH6Ke-uMAKWF908ybTrjXwXrwPU" />
+    <!--  
+        Stylesheets and Preprocessors
+        ==============================
+	
+        You can always bring in CSS files manually with `link` tags, or asynchronously
+        on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+        take advantage of Sails' boilerplate asset management.
+
+        By default, tylesheets from your `assets/linker/styles` folder are included
+        here automatically.  Both CSS (.css) and LESS (.less) are supported.
+        In production, your styles will be minified and concatenated into a single file.
+        
+        To customize any part of the built-in behavior, just edit your Gruntfile.
+        For example, here are a few things you could do:
+            
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+ 
+    <!--STYLES-->
+    <link rel="stylesheet" href="/linker/styles/bootstrap.css">
+    <link rel="stylesheet" href="/linker/styles/css/demo.css">
+    <link rel="stylesheet" href="/linker/styles/css/fallback.css">
+    <link rel="stylesheet" href="/linker/styles/css/normalize.css">
+    <link rel="stylesheet" href="/linker/styles/css/style1.css">
+    <link rel="stylesheet" href="/linker/styles/css/style2.css">
+    <link rel="stylesheet" href="/linker/styles/css/style3.css">
+    <link rel="stylesheet" href="/linker/styles/css/style4.css">
+    <link rel="stylesheet" href="/linker/styles/css/style5.css">
+    <link rel="stylesheet" href="/linker/styles/css/style_common.css">
+    <link rel="stylesheet" href="/linker/styles/custom.css">
+    <!--STYLES END-->
+
+    <!--Added this so the client has access to the csrf tag and it's grabbed first service side on every page -->
+    <script type="text/javascript">
+      window.overlord = { csrf: "<%= _csrf %>" };
+    </script>
+
+    <!-- The sound file tht will play on activity events -->
+    <audio id="chatAudio">
+      <source src="/sounds/notify.ogg" type="audio/ogg">
+      <source src="/sounds/notify.mp3" type="audio/mpeg">
+      <source src="/sounds/notify.wav" type="audio/wav">
+    </audio>
+
+  </head>
+
+  <body>
+
+    <div class=" navbar-inverse navbar-top" style="margin-top:-60px;
+  background-color:#303030;">
+      <div class="container">
+	  
+        <div class="navbar-header" style="margin-top:20px">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+		  <div style="margin-top:-20px;margin-left:15px;">
+		  <a class="navbar-brand" href="/" ><img src="/images/logo.png" width="150">
+           </a>
+		   </div>
+        </div>
+        <div class="navbar-collapse collapse" style="margin-top:30px">
+          <ul class="nav navbar-nav"style="font-size:20px;margin-left:50px;">
+		  
+		  <li><a href="/shows">Афіша</a></li>
+		    <li><a href="/news">Новини</a></li>
+			  <li><a href="/photos">Фото</a></li>
+			    <li><a href="/music">Музика</a></li>
+				<li><a href="/wiki">Довідник</a></li>
+				<li><a href="/ads">Об'яви</a></li>
+            <% if (session.authenticated) { %>
+              <li class="active"><a href="/user/show/<%= session.User.id %>"><%= session.User.name %> </a> </li>
+            <% } %>
+            <% if (session.authenticated && session.User.admin) { %>
+            <li><a href="/user">Контроль</a></li>
+            <% } %>
+			
+
+          </ul>
+          <div class="navbar-right">
+            <% if (session.authenticated) { %>
+              <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy">Вийти</a>
+    
+            <% } %>
+          </div>
+          <% if (!session.authenticated) { %>
+            
+            <a href="#" data-toggle="modal" data-target="#myModallogin" class="btn btn-success navbar-btn navbar-right">Увійти</a>
+			
+			<a href="#" data-toggle="modal" data-target="#myModalsign" class="btn btn-default navbar-btn navbar-right">Регаємся</a>
+          	
+			<!-- Modal LOGIN -->
+<div class="modal fade" id="myModallogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Вхід</h4>
+      </div>
+      <div class="modal-body">
+	 <form action="/session/create" method="POST">
+	<h2 class="form-signin-heading">Будьласка увійдіть...</h2>
+
+	<p><input type="text" class="form-control" placeholder="Email" name="email"></p>
+	<p><input type="password" class="form-control" placeholder="Пароль" name="password"></p>
+	<p><input type="submit" class="btn btn-lg btn-primary btn-block" value="Вхід"/></p>
+	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+	
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<a href="/session/new" class="btn btn-primary" >Вілкрити в звичайному вікні</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+          	<!-- Modal SIGN -->
+<div class="modal fade" id="myModalsign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Регаємся</h4>
+      </div>
+      <div class="modal-body">
+	
+<form action="/user/create" method="POST" id="sign-up-form">
+
+	<h2 class="form-signin-heading">Створити ак.</h2>
+
+	
+	<div class="control-group">
+	<p><input type="text" class="form-control" placeholder="Ім'я" name="name">
+	</div>
+
+	<!-- <div class="control-group">
+	<p><textarea name="title"  id="redactor"/></textarea>	 
+		
+	</div> -->
+	<div class="control-group">
+	<p><input type="text" class="form-control" placeholder="email адреса" name="email">
+	</div>
+
+	<div class="control-group">
+	<p><input type="password" class="form-control" placeholder="password" name="password" id="password">
+	</div>
+
+	<div class="control-group">
+	<p><input type="password" class="form-control" placeholder="password повторно" name="confirmation">
+	<br />
+	</div>
+
+	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Створити ак"/>
+	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<a href="/user/new" class="btn btn-primary" >Вілкрити в звичайному вікні</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+		  
+		  
+		  <% } %>
+        </div>
+      </div>
+    </div>
+	<div class="container">
+<div class="col-sm-12 col-sm-12" >
+<div class=" navbar-collapse collapse"style="background-color:#ddd;padding:5px;">
+           <ul class="nav navbar-nav"style="font-size:20px;margin-left:5px;">
+			<p><% 
+			
+	
+				%></p>
+        </ul>
+		
+		 <div class="navbar-right">
+		<ul class="nav navbar-nav"style="font-size:20px;margin-left:-5px;">
+			<p>Локація:  Коломия			 Вхід</p>
+			
+         </ul>
+	   </div>
+</div>
+</div>
+</div>
+     <div class="col-xs-12 col-sm-1" style="position:fixed;float:right;margin-top:150px;">
+      <a class="btn" href="/photos"><i class="icon-align"> <img src="/images/photo.png"></i></a>
+		 <a class="btn" href="/music"><i class="icon-align"><img src="/images/music.png"></i></a>
+		  <a class="btn" href="/wiki"><i class="icon-align"> <img src="/images/shopping.png"></i></a>
+		    <a class="btn" href="/ads"><i class="icon-align"><img src="/images/calendar.png"></i></a>
+		   
+        </div> 
+    
+    <%- body %>  
+<div class="col-xs-12 col-sm-3">
+			<div style="background-color:#ddd; height:150px; margin-bottom:5px;">
+          1	
+        </div>
+			<div style="background-color:#ddd; height:150px; margin-bottom:5px;">
+          2
+        </div>
+			<div style="background-color:#ddd; height:150px; margin-bottom:5px;">
+          3
+        </div>
+			<div style="background-color:#ddd; height:150px; margin-bottom:5px;">
+          3
+        </div>
+			<div style="background-color:#ddd; height:150px; margin-bottom:5px;">
+          3
+        </div>
+			<div style="background-color:#ddd; height:150px; margin-bottom:5px;">
+          3
+        </div>
+			<div style="background-color:#ddd; height:150px; margin-bottom:5px;">
+          3
+        </div>
+		
+		</div>
+		</div>
+    <div class="container">
+      <hr>
+      <footer class="footer">
+        <div>
+          <a href="http://майдан.pp.ua/">cityg.info</a> 
+          <div>City guide &copy; all right reserve</div>
+        </div>
+      </footer>
+    </div>
+
+    <!--
+        Client-side Templates
+        ========================
+
+    		HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+        that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `assets/linker/templates` folder, then
+        include them here automatically.
+        
+        To customize this behavior to fit your needs, just edit your Gruntfile.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different template engine (handlebars, jade, dust, etc.)
+            + Internationalize your templates using a server-side stringfile
+              before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    <script type="text/javascript" src="/jst.js"></script>
+    <!--TEMPLATES END-->
+
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can 
+      take advantage of Sails' boilerplate asset management.
+
+      By default, filesin your `assets/linker/js` folder are included here
+      automatically.  Both JavaScript (.js) and CoffeeScript (.coffee) are supported.
+      In production, your scripts will be minified and concatenated into a single file. 
+      
+      To customize any part of the built-in behavior, just edit your Gruntfile.
+      For example, here are a few things you could do:
+          
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+    
+    <!--SCRIPTS-->
+    <script src="/linker/js/socket.io.js"></script>
+    <script src="/linker/js/sails.io.js"></script>
+    <script src="/linker/js/jquery.validate.min.js"></script>
+    <script src="/linker/js/app.js"></script>
+    <script src="/linker/js/bootstrap.js"></script>
+    <script src="/linker/js/customValidate.js"></script>
+    <script src="/linker/js/jquery.js"></script>
+    <script src="/linker/js/js/jquery.hoverfold.js"></script>
+    <script src="/linker/js/js/modernizr.custom.69142.js"></script>
+    <script src="/linker/js/underscore.js"></script>
+    <!--SCRIPTS END-->   
+     <script src="/redactor/redactor/redactor.js"></script> 
+		<script>
+		
+			$(function()
+			{
+				$('#redactor').redactor({
+					imageGetJson: 'images/images.json',
+					imageUpload: 'images/upload/upload.php',
+					fileUpload: '/upload/upload_file.php'
+				});
+			});</script> 
+	
+  </body>
+</html>

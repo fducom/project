@@ -1,0 +1,42 @@
+
+<div class="container">
+			
+	<h3>Довідник - Міський транспорт </h3>
+	
+<div class="col-xs-12 col-sm-9">	
+		
+		<% _.each(wikis, function(wiki) { %>
+		<div class="col-xs-12 col-sm-4">
+          <div style="background-color:#ddd;padding:13px; margin-bottom:25px;">
+		<tr data-id="<%= wiki.id %>" data-model="wiki">
+			<p>
+			<h4><a href="/wiki/show/<%= wiki.id %>"><%= wiki.title %></a></h4>
+		<a href="/wiki/show/<%= wiki.id %>">
+			<img src="<%= wiki.img %>"  width="220">
+			</a>
+			<div >
+			
+			<small>Автор:<%= wiki.name %></small>
+				</div>
+			<% if (session.authenticated && session.User.admin) { %>
+		
+			
+			<td><a href="/wiki/edit/<%= wiki.id %>" class="btn btn-sm btn-warning">Редагувати</a></td>
+
+			<td><form action="/wiki/destroy/<%= wiki.id %>" method="POST">
+				<input type="hidden" name="_method" value="Видалити"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Видалити"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+		<%} %>
+		<td><a href="/wiki/show/<%= wiki.id %>" class="btn btn-sm btn-primary">Переглянути</a></td>
+			</p>
+		</tr> 
+	
+</div>
+
+</div>
+		<% }) %>
+	
+
+</div>

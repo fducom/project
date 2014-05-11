@@ -1,0 +1,27 @@
+ <title>Медіа - <%= music.title %> City Guide Info</title>
+<div class='container'>
+<div class="col-xs-12 col-md-9">
+	<div id="space"><h3>Медіа <%= music.title %> </h3></div>
+	<section class="row">	
+	<article class="col-sm-12 col-md-12 col-lg-12">
+          <div style="background-color:#ddd;padding:15px;">
+          <h3><%= music.title %> </h3>
+	
+			<hr>
+			<div>
+			<h4>Опис</h4>
+			<p><%- music.text %></p>
+			
+			<hr>
+
+			<p><small>Дата: <%= music.updatedAt %></small></p>
+			
+					<% if (session.authenticated && session.User.admin) { %>
+			<a class="btn btn-medium btn-primary" href="/music/edit/<%= music.id %>">Редагувати</a>
+			<%} %>
+			  </div>
+	
+        </div>
+</article>
+</section>
+ </div>

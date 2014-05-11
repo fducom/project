@@ -1,0 +1,29 @@
+<title>Афіша - <%= shows.title %> City Guide Info</title>
+<div class='container'>
+<div class="col-xs-12 col-md-9">
+	<div id="space"><h3>Подія <%= shows.title %> </h3></div>
+	<section class="row">	
+	<article class="col-sm-12 col-md-12 col-lg-12">
+          <div style="background-color:#ddd;padding:15px;">
+          <h3><%= shows.title %> </h3>
+		  <div >
+		  <img src="<%= shows.img %>"  width="100%">
+		  </div>
+	<hr>
+	<div>
+	<h4>Опис</h4>
+	<p><%- shows.text %></p>
+	
+	<hr>
+
+	<p><small>Дата: <%= shows.updatedAt %></small></p>
+	
+			<% if (session.authenticated && session.User.admin) { %>
+	<a class="btn btn-medium btn-primary" href="/shows/edit/<%= shows.id %>">Редагувати</a>
+	<%} %>
+	  </div>
+	
+        </div>
+</article>
+</section>
+ </div>

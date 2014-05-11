@@ -1,0 +1,68 @@
+
+<div class="container">
+		
+<div class="col-xs-12 col-md-9">
+	<div id="space"><h3>Об'яви</h3></div>
+	<section class="row">
+
+		<% _.each(adss, function(ads) { %>
+	
+		<article class="col-sm-3 col-md-3 col-lg-3">
+          <div style="background-color:#ddd;padding:13px; margin-bottom:25px;">
+		<tr data-id="<%= ads.id %>" data-model="ads">
+			<p>
+			
+			<a href="#" data-toggle="modal" data-target="#myModal<%= ads.id %>"><img src="<%= ads.img %>" width="100%"></a>
+			<div >
+			<h4><a href="/ads/show/<%= ads.id %>"><%= ads.title %></a></h4>
+		<!-- Modal -->
+<div class="modal fade" id="myModal<%= ads.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= ads.title %></h4>
+      </div>
+      <div class="modal-body">
+ <p><%- ads.text %></p>
+     <img src="<%= ads.img %>" width="100%">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<a href="/ads/show/<%= ads.id %>" class="btn btn-primary" >Відкрити в звичайному вікні</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+		</div>
+		<!-- Button trigger modal -->
+
+
+
+		
+			
+			<% if (session.authenticated && session.User.admin) { %>
+			
+			
+			
+			<td><a href="/ads/edit/<%= ads.id %>" class="btn btn-sm btn-warning">Редагувати</a></td>
+
+			<td><form action="/ads/destroy/<%= ads.id %>" method="POST">
+				<input type="hidden" name="_method" value="Видалити"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Видалити"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+		<%} %>
+
+			</p>
+		</tr> 
+	
+</div>
+
+</article>
+
+		<% }) %>
+</section>
+</div>

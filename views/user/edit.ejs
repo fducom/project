@@ -1,0 +1,24 @@
+
+<div class="col-xs-12 col-sm-9">
+<form action="/user/update/<%= user.id %>" method="POST" class="form-signin">
+		<h2> Редагувати профіль... </h2>
+
+		<input value="<%= user.name %>" name="name" type="text" class="form-control"/>
+		<div class="control-group">
+	<textarea name="title" id="redactor"/><%= user.title %></textarea>	
+		
+	</div><br>
+		<input value="<%= user.email %>" name="email" type="text" class="form-control"/>
+		<% if (session.authenticated && session.User.admin) { %>
+			<% if (user.admin) { %>
+				<input type="hidden" name="admin" value="unchecked">
+				<label class="checkbox"><input type="checkbox" name="admin" checked> Admin</label>
+			<% } else { %>
+				<input type="hidden" name="admin" value="unchecked">
+				<label class="checkbox"><input type="checkbox" name="admin"> Admin</label>
+			<% } %> 
+		<% } %> 
+		<input type="submit" value="Зберегти" class="btn btn-lg btn-primary btn-block"/>
+		<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+
+<div>

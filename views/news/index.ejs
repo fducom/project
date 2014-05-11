@@ -1,0 +1,86 @@
+<title>Новини - City Guide Info</title>
+<div class="container">
+		
+<div class="col-xs-12 col-md-9">
+	<div id="space"><h3>Новини</h3></div>
+
+<section class="row">
+		
+	
+			<article class="col-sm-12 col-md-12 col-lg-12">
+    
+    <div class="well well-sm">
+        <strong>Новини</strong>
+        <div class="btn-group">
+            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+            </span>Список</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                class="glyphicon glyphicon-th"></span>Сітка</a>
+        </div>
+    </div>
+    <div id="products" >
+	  	<% _.each(newss, function(news) { %>
+        <div class="item  col-xs-4 col-lg-4">
+        <a href="#" data-toggle="modal" data-target="#myModal<%= news.id %>">    <div class="thumbnail">
+                <img class="group list-group-image" src="http://img.youtube.com/vi/<%= news.img %>/mqdefault.jpg"alt=""/>
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                       <%= news.title %></h4>
+                    <p class="group inner list-group-item-text">
+						
+                        </p></a>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <small >
+                                <%= news.updatedAt %></small>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                   	<% if (session.authenticated && session.User.admin) { %>
+			
+			
+			<td><a href="/news/edit/<%= news.id %>" class="btn btn-sm btn-warning">Редагувати</a></td>
+
+			<td><form action="/news/destroy/<%= news.id %>" method="POST">
+				<input type="hidden" name="_method" value="Видалити"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Видалити"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+		<%} %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+				<!-- Modal -->
+<div class="modal fade" id="myModal<%= news.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= news.title %></h4>
+      </div>
+      <div class="modal-body">
+ <p><%- news.text %></p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Назад</button>
+		<a href="/news/show/<%= news.id %>" class="btn btn-primary" >Відкрити в звичайному вікні</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+		
+		<!-- Button trigger modal -->
+			<% }) %>
+    </div>
+
+</article>
+</section>
+</div>
+
+
+
+
+

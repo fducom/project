@@ -1,0 +1,19 @@
+	
+<% if (session.authenticated && session.User.admin) { %>	
+	<form action="/ads/update/<%= ads.id %>" method="POST" class="form-edit">
+		<h2> Редагувати ads </h2>
+
+		<input type="hidden" value="<%= session.User.id %>" name="name" type="text" class="form-control"/>
+		<input value="<%= ads.title %>" name="title" type="text" class="form-control"/>
+		
+		<textarea name="text" id="redactor"/><%= ads.text %></textarea>
+		<input value="<%= ads.img %>" name="img" type="text" class="form-control"/>
+				
+		
+	</div>
+		<br>
+		<input type="submit" value="Зберегти" class="btn btn-lg btn-primary btn-block"/>
+		<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+	</form>
+
+ <%} else { res.redirect('/session/new'); } %>

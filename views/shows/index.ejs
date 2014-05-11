@@ -1,0 +1,275 @@
+<title>Афіша - City Guide Info</title>
+<div class="container">
+		
+<div class="col-xs-12 col-md-9">
+	<ul class="nav navbar-nav navbar-right" style="font-size:17px;margin-left:0px;">
+	
+         <li>   <a href="#">Вечірки</a></li>
+<li>   <a href="#">Кіно</a></li>
+<li>   <a href="#">Концерти</a></li>
+<li>   <a href="#">Вистави</a></li>
+<li>   <a href="#">Спортивні події</a></li>
+<li>   <a href="#">Для дітей</a></li>
+      </ul><br></br>
+
+	
+	<section class="row">
+	<article class="col-sm-4 col-md-4 col-lg-4">
+		<div class="panel panel-default pan-property">
+								 <img class="img-responsive" src="http://topdj.ua/upload0/events/00/16/47/164709o.jpg" width="350" alt="">
+							
+								 <span class="offer-type">	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p><div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span>
+							</div>
+			
+	</article>
+		
+	<article class="col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default pan-property">
+								 <img class="img-responsive" src="http://cs412717.vk.me/v412717599/68b1/JFowHmQf0hA.jpg"  width="118" alt="">
+							
+								 <span class="offer-type">	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p><div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span>
+							</div>
+
+		<div class="panel panel-default pan-property">
+								 				 <img class="img-responsive" src="http://cs412717.vk.me/v412717599/68b1/JFowHmQf0hA.jpg"  width="118" alt="">
+								 <span class="offer-type">	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p><div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span>
+							</div>
+	</article>
+	<article class="col-sm-4 col-md-4 col-lg-4">
+						<div class="panel panel-default pan-property">
+								 <img class="img-responsive" src="http://cs412717.vk.me/v412717599/68b1/JFowHmQf0hA.jpg"  width="350" alt="">
+							
+								 <span class="offer-type">	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p><div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span>
+							</div>
+	</article>
+	</section>
+	<hr>
+	<section class="row">
+
+		<% _.each(showss, function(shows) { %>
+	
+		<article class="col-sm-3 col-md-3 col-lg-3">
+     	<div class="panel panel-default pan-property">
+								<a href="#" data-toggle="modal" data-target="#myModal<%= shows.id %>"><img src="<%= shows.img %>" width="100%"></a>
+								 <span class="offer-type">	<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p><div class="view-back">
+					
+						<a href="#">&rarr;</a>
+						
+					</div></span>	
+							</div>
+		
+		<!-- Modal -->
+<div class="modal fade" id="myModal<%= shows.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= shows.title %></h4>
+      </div>
+      <div class="modal-body">
+ <p><%- shows.text %></p>
+     <img src="<%= shows.img %>" width="100%">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<a href="/shows/show/<%= shows.id %>" class="btn btn-primary" >Відкрити в звичайному вікні</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+		
+		<!-- Button trigger modal -->
+
+
+
+		
+			
+			<% if (session.authenticated && session.User.admin) { %>
+			
+			
+			
+			<td><a href="/shows/edit/<%= shows.id %>" class="btn btn-sm btn-warning">Редагувати</a></td>
+
+			<td><form action="/shows/destroy/<%= shows.id %>" method="POST">
+				<input type="hidden" name="_method" value="Видалити"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Видалити"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+		<%} %>
+
+			</p>
+		</tr> 
+	
+
+
+</article>
+
+		<% }) %>
+</section>
+<hr>
+<h3>Сьогодні</h3>
+<section class="row">
+	<% _.each(showss, function(shows) { %>
+	
+		<article class="col-sm-3 col-md-3 col-lg-3">
+     	<div class="panel panel-default pan-property">
+								<a href="#" data-toggle="modal" data-target="#myModal<%= shows.id %>"><img src="<%= shows.img %>" width="100%"></a>
+									<span class="offer-type"><%= shows.title %>		
+								<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p>
+								 </span>
+							</div>
+		
+		<!-- Modal -->
+<div class="modal fade" id="myModal<%= shows.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= shows.title %></h4>
+      </div>
+      <div class="modal-body">
+ <p><%- shows.text %></p>
+     <img src="<%= shows.img %>" width="100%">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<a href="/shows/show/<%= shows.id %>" class="btn btn-primary" >Відкрити в звичайному вікні</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+		
+		<!-- Button trigger modal -->
+
+
+
+		
+			
+			<% if (session.authenticated && session.User.admin) { %>
+			
+			
+			
+			<td><a href="/shows/edit/<%= shows.id %>" class="btn btn-sm btn-warning">Редагувати</a></td>
+
+			<td><form action="/shows/destroy/<%= shows.id %>" method="POST">
+				<input type="hidden" name="_method" value="Видалити"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Видалити"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+		<%} %>
+
+			</p>
+		</tr> 
+	
+
+
+</article>
+
+		<% }) %>
+</section>
+<hr>
+<h3>Незабаром</h3>
+
+<section class="row">
+	<% _.each(showss, function(shows) { %>
+	
+		<article class="col-sm-3 col-md-3 col-lg-3">
+     	<div class="panel panel-default pan-property">
+								<a href="#" data-toggle="modal" data-target="#myModal<%= shows.id %>"><img src="<%= shows.img %>" width="100%"></a>
+								<span class="offer-type"><%= shows.title %>		
+								<p><a href="" class="st-user event-item">0</a>
+								<a href="" class="st-comment event-item" >0</a>
+								<a href="" class="st-like event-item" >0</a>
+								<a href="" class="st-time event-item" >0</a></p>
+								 </span>
+							</div>
+				
+		<!-- Modal -->
+<div class="modal fade" id="myModal<%= shows.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= shows.title %></h4>
+      </div>
+      <div class="modal-body">
+ <p><%- shows.text %></p>
+     <img src="<%= shows.img %>" width="100%">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<a href="/shows/show/<%= shows.id %>" class="btn btn-primary" >Відкрити в звичайному вікні</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+		
+		<!-- Button trigger modal -->
+
+
+
+		
+			
+			<% if (session.authenticated && session.User.admin) { %>
+			
+			
+			
+			<td><a href="/shows/edit/<%= shows.id %>" class="btn btn-sm btn-warning">Редагувати</a></td>
+
+			<td><form action="/shows/destroy/<%= shows.id %>" method="POST">
+				<input type="hidden" name="_method" value="Видалити"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Видалити"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+		<%} %>
+
+			</p>
+		</tr> 
+	
+
+
+</article>
+
+		<% }) %>
+</section>
+</div>

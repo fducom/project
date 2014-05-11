@@ -1,0 +1,19 @@
+<div style="height:120px;">
+</div>
+<form action="/session/create" method="POST" class="form-signin">
+	<h2 class="form-signin-heading">Будьласка увійдіть...</h2>
+
+	<% if(flash && flash.err) { %>
+		<ul class="alert alert-success">
+	<% Object.keys(flash.err).forEach(function(error) { %>
+		<li><%- JSON.stringify(flash.err[error]) %></li>
+	<% }) %>
+	</ul>
+	<% } %>
+
+	<input type="text" class="form-control" placeholder="Email" name="email">
+	<input type="password" class="form-control" placeholder="Пароль" name="password">
+	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Вхід"/>
+	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+	
+</form>

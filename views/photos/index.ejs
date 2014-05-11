@@ -1,0 +1,68 @@
+
+<div class="container">
+		
+<div class="col-xs-12 col-md-9">
+	<div id="space"><h3>Фотогалерея</h3></div>
+	<section class="row">
+
+		<% _.each(photoss, function(photos) { %>
+	
+		<article class="col-sm-3 col-md-3 col-lg-3">
+          <div style="background-color:#ddd;padding:13px; margin-bottom:25px;">
+		<tr data-id="<%= photos.id %>" data-model="photos">
+			<p>
+			
+			<a href="#" data-toggle="modal" data-target="#myModal<%= photos.id %>"><img src="<%= photos.img %>" width="100%"></a>
+			<div >
+			<h4><a href="/photos/show/<%= photos.id %>"><%= photos.title %></a></h4>
+		<!-- Modal -->
+<div class="modal fade" id="myModal<%= photos.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= photos.title %></h4>
+      </div>
+      <div class="modal-body">
+ <p><%- photos.text %></p>
+     <img src="<%= photos.img %>" width="100%">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<a href="/photos/show/<%= photos.id %>" class="btn btn-primary" >Відкрити в звичайному вікні</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+		</div>
+		<!-- Button trigger modal -->
+
+
+
+		
+			
+			<% if (session.authenticated && session.User.admin) { %>
+			
+			
+			
+			<td><a href="/photos/edit/<%= photos.id %>" class="btn btn-sm btn-warning">Редагувати</a></td>
+
+			<td><form action="/photos/destroy/<%= photos.id %>" method="POST">
+				<input type="hidden" name="_method" value="Видалити"/>
+				<input type="submit" class="btn btn-sm btn-danger" value="Видалити"/>
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			</form></td>
+		<%} %>
+
+			</p>
+		</tr> 
+	
+</div>
+
+</article>
+
+		<% }) %>
+</section>
+</div>

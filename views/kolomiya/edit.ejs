@@ -1,0 +1,34 @@
+	
+<div class="container">
+			
+
+<div class="col-xs-12 col-sm-9">
+<% if (session.authenticated && session.User.admin) { %>	
+	<form action="/kolomiya/update/<%= kolomiya.id %>" method="POST">
+		<h2> Редагувати kolomiya </h2>
+
+		<input type="hidden" value="<%= session.User.id %>" name="name" type="text" class="form-control"/>
+		<br>
+		<input value="<%= kolomiya.title %>" name="title" type="text" class="form-control"/>
+		<br>
+		<textarea name="text" id="redactor"/><%= kolomiya.text %></textarea>
+		<br>
+		<input value="<%= kolomiya.img %>" name="img" type="text" class="form-control"/>
+				<br>
+		<div class="control-group" type="text">
+		<select name="category" class="form-control">
+		<option  value="">Без категорії Васька)</option>
+		<option  value="gd-vokzal">ЖД-Вокзал</option>
+		<option  value="autovokzal">Автовокзал</option>
+		<option  value="citytransport">Міський транспорт</option>
+		<option  value="taxi">Таксі</option>
+		</select>
+	</div>
+	<br>
+<input name="category" type="text" placeholder="Нова категорія" class="form-control"/>
+<br>
+		<input type="submit" value="Зберегти" class="btn btn-lg btn-primary btn-block"/>
+		<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+	</form>
+</div>
+ <%} else { res.redirect('/session/new'); } %>

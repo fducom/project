@@ -1,0 +1,34 @@
+
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>HTML5 Video Player</title>
+	<style>
+		body { font-family: helvetica; font-size: 13px; background: url("http://ntktv.ua/bitrix/templates/ntk/images/bg-main.png") repeat scroll 0 0 transparent; }
+		#page, #ratusha, #ratusha_wrapper { text-align: center; margin: 0 auto; }
+		h1 { font-weight: normal; color: #666; }
+		h1 a { text-decoration: none; color: red; font-size: 70%; }
+	</style>
+	<script src="http://stream.ntktv.ua/videojs/video.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	setTimeout(function() { 
+		VideoJS.setupAllWhenReady();
+	}, 250);
+	</script>
+	<link rel="stylesheet" href="http://stream.ntktv.ua/videojs/video.css" type="text/css" media="screen" title="Video JS">
+</head>
+<body>
+	<div id="ratusha" class="video-js-box">
+		<video class="video-js" width="590" height="472" controls autoplay>
+			<source src="http://stream.ntktv.ua/s/ratusha/stream_512k.m3u8" />
+			<source src="http://stream.ntktv.ua/s/ratusha/stream_512k.m3u8" type="application/x-mpegURL" />
+			<object id="flash_fallback_1" class="vjs-flash-fallback" width="590" height="472" type="application/x-shockwave-flash" data="http://stream.ntktv.ua/videojs/smp.swf">
+				<param name="movie" value="http://stream.ntktv.ua/videojs/smp.swf" />
+				<param name="allowfullscreen" value="true" />
+				<param name="FlashVars" value="src=http://stream.ntktv.ua/s/ratusha/stream_512k.m3u8&streamType=live&plugin_hls=/videojs/hls.swf&hls_namespace=hlsplugin&autoPlay=true">
+			</object>
+		</video>
+	</div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^subdomain\.abc\.com [NC]
+RewriteRule ^(.*)$ http://www.cityg.info/user/profile/$1 [L,R=301]
